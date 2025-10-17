@@ -1,0 +1,96 @@
+@rendermode InteractiveServer
+@inject NavigationManager NavigationManager
+@using SmartControl.Services
+
+@{
+	var Items = Menu == "main" ? MenuItems.Groups : MenuSettingsItems.Groups;
+	var ID = Menu == "main" ? "sc-menu-main" : "sc-menu-settings";
+}
+
+<nav id="@ID">
+	<ul class="sc-menu">
+		@foreach (var item in Items)
+		{
+			var liId = (item.Name).ToLower().Replace(" ", "-");
+			var notUrl = '#';
+			var url = item.NavigateUrl != notUrl.ToString() ? item.NavigateUrl : string.Empty;
+			var active = url == NavigationManager.ToBaseRelativePath(NavigationManager.Uri).TrimEnd('/').ToLower() ? "active" : "";
+			var activeSub = item.Groups != null && item.Groups.Any(x => x.NavigateUrl == (NavigationManager.ToBaseRelativePath(NavigationManager.Uri)).ToString()) ? "active" : "";
+			var show = activeSub == "active" ? "show" : "";
+
+			<li id="@liId" class="@active @activeSub">
+				<div class="li-wrap @show" onclick="document.querySelector('#sub-@liId').classList.toggle('show');
+													document.querySelector('#@liId').classList.toggle('open');
+													document.getElementById('sidebar').classList.remove('auto-expanded');">
+					<i class="@item.IconCssClass"></i>
+					<a href="@item.NavigateUrl" class="@(item.Groups != null && item.Groups.Count > 0 ? "" : "no-group")">
+						<span>@item.Name</span>
+					</a>
+					<span class="action-submenu icon-chevron-right @(item.Groups != null && item.Groups.Count > 0 ? "" : "disabled")" 
+							aria-hidden="true"
+							onclick="document.querySelector('#sub-@liId').classList.toggle('show')">
+					</span>
+				</div>
+
+				@if (item.Groups != null && item.Groups.Count > 0)
+				{
+					<div id="sub-@liId" class="sub-menu-wrap">
+						<ul class="sub-menu">
+							@foreach (var subItem in item.Groups)
+							{
+								var subLiId = (subItem.Name).ToLower().Replace(" ", "-");
+								var hasSubMenu = subItem.Groups != null && subItem.Groups.Count > 0 ? "has-submenu" : "";
+								var subUrl = subItem.NavigateUrl != notUrl.ToString() ? subItem.NavigateUrl : string.Empty;
+								var subactive = subUrl == (NavigationManager.ToBaseRelativePath(NavigationManager.Uri)).ToString() ? "active" : "";
+								<li id="@subLiId" class="@subactive @hasSubMenu">
+									<a href="@subItem.NavigateUrl" onclick="document.querySelector('#sub-@subLiId').classList.toggle('show');
+											document.querySelector('#@subLiId').classList.toggle('open');">@subItem.Name</a>
+									<span class="action-submenu link-icon icon-chevron-right @(subItem.Groups != null && subItem.Groups.Count > 0 ? "" : "disabled")"
+										  aria-hidden="true"
+										  onclick="document.querySelector('#sub-@subLiId').classList.toggle('show')">
+									</span>
+									<span class="link-icon icon-arrow-up-right @(subItem.Groups != null && subItem.Groups.Count > 0 ? "disabled" : "")"
+									   aria-hidden="true">
+									</span>
+
+									@if (subItem.Groups != null && subItem.Groups.Count > 0)
+									{
+										<div id="sub-@subLiId" class="sub-third-menu-wrap">
+											<ul class="sub-sub-menu">
+												@foreach (var subSubItem in subItem.Groups)
+												{
+													<li>
+														<a href="@subSubItem.NavigateUrl">- @subSubItem.Name</a>
+													</li>
+												}
+											</ul>
+										</div>
+									}
+								</li>
+							}
+						</ul>
+					</div>
+				}
+			</li>
+		}
+	</ul>
+</nav>
+
+
+@code{
+	[Parameter] public string Menu { get; set; } = "main";
+	protected override void OnInitialized()
+	{
+		NavigationManager.LocationChanged += OnLocationChanged;
+	}
+
+	private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+	{
+		StateHasChanged();
+	}
+
+	public void Dispose()
+	{
+		NavigationManager.LocationChanged -= OnLocationChanged;
+	}
+}

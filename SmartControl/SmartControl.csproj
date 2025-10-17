@@ -4,6 +4,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Components\Layout\SC_Menu.razor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Components\Layout\SC_Menu.razor.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="DevExpress.Blazor" Version="24.1-*" />
@@ -13,5 +19,9 @@
   <ItemGroup>
     <ProjectReference Include="..\SmartControl.Client\SmartControl.Client.csproj" />
   </ItemGroup>
+
+  <Target Name="CompileSass" BeforeTargets="Build">
+    <Exec Command="npm run build:sass" />
+  </Target>
 
 </Project>

@@ -1,0 +1,12 @@
+{
+  "name": "blazor-devexpress-styles",
+  "version": "1.0.0",
+  "private": true,
+    "scripts": {
+        "build:sass": "sass wwwroot/css/styles/custom-style.scss wwwroot/css/custom-style.css --style=expanded && sass wwwroot/css/styles/custom-style.scss wwwroot/css/custom-style.min.css --style=compressed",
+        "watch:sass": "sass --watch wwwroot/css/styles/custom-style.scss:wwwroot/css/custom-style.css --style=expanded"
+    },
+  "devDependencies": {
+    "sass": "^1.79.0"
+  }
+}

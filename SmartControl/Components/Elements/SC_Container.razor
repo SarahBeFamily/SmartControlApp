@@ -1,0 +1,33 @@
+﻿<div class="container x-10">
+    <div class="row mb-30">
+        <div class="col-6 col-lg-3 col-xl-2 gutter-lg-max">
+           @Row1Col1
+        </div>
+        <div class="col-6 col-xl-2 gutter-lg-max">
+             @Row1Col2
+        </div>
+        <div class="col-6 col-xl-4 gutter-lg-max">
+            @Row1Col3
+        </div>
+    </div>
+    <div class="row mb-30">
+        <div class="col-6 col-lg-3 col-xl-2 gutter-lg-max">
+            @Row2Col1
+        </div>
+        <div class="col-6 col-xl-2 gutter-lg-max">
+           @Row2Col2
+        </div>
+        <div class="col-6 col-xl-4 gutter-lg-max">
+            @Row2Col3
+        </div>
+    </div>
+</div>
+@code
+{
+    [Parameter] public RenderFragment Row1Col1 { get; set; }
+    [Parameter] public RenderFragment Row1Col2 { get; set; }
+    [Parameter] public RenderFragment Row1Col3 { get; set; }
+    [Parameter] public RenderFragment Row2Col1 { get; set; }
+    [Parameter] public RenderFragment Row2Col2 { get; set; }
+    [Parameter] public RenderFragment Row2Col3 { get; set; }
+}
