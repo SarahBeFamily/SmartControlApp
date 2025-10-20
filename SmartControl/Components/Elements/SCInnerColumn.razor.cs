@@ -7,7 +7,7 @@
 
 namespace SmartControl.Components.Elements
 {
-    public partial class SC_InnerColumn
+    public partial class SCInnerColumn
     {
         [Parameter] public string? CssClass { get; set; }
         [Parameter] public bool ColumnWidth1 { get; set; }

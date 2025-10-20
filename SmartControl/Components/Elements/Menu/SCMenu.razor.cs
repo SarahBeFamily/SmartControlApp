@@ -7,9 +7,9 @@ using SmartControl.Services;
 /// scegliere il gruppo di voci del menù
 /// </summary>
 
-namespace SmartControl.Components.Elements
+namespace SmartControl.Components.Elements.Menu
 {
-	public partial class SC_Menu
+	public partial class SCMenu
 	{
 		[Parameter] public string Menu { get; set; } = "main";
     }

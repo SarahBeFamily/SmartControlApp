@@ -1,0 +1,50 @@
+<nav id="sc-top-menu">
+	<ul class="sc-top-menu flex">
+		@foreach (var item in MenuTopItems.Groups)
+		{
+			var liId = (item.Name).ToLower().Replace(" ", "-");
+
+			<li id="@liId" class="">
+				<div class="li-wrap">
+					<i class="@item.IconCssClass"></i>
+					<a href="@item.NavigateUrl" class="@(item.Groups != null && item.Groups.Count > 0 ? "" : "no-group")">
+						<span>@item.Name</span>
+					</a>
+					<span class="action-submenu icon-chevron-right @(item.Groups != null && item.Groups.Count > 0 ? "" : "disabled")" 
+							aria-hidden="true"
+							onclick="document.querySelector('#sub-@liId').classList.toggle('show')">
+					</span>
+				</div>
+
+				@if (item.Groups != null && item.Groups.Count > 0)
+				{
+					<div id="sub-@liId" class="sub-menu-wrap">
+						<ul class="sub-menu">
+							@foreach (var subItem in item.Groups)
+							{
+								var subLiId = (subItem.Name).ToLower().Replace(" ", "-");
+								var hasSubMenu = subItem.Groups != null && subItem.Groups.Count > 0 ? "has-submenu" : "";
+								
+								<li id="@subLiId" class="@hasSubMenu">
+									<a href="@subItem.NavigateUrl" onclick="document.querySelector('#sub-@subLiId').classList.toggle('show');
+											document.querySelector('#@subLiId').classList.toggle('open');">
+										@subItem.Name
+									</a>
+									
+									<span class="link-icon icon-arrow-up-right @(subItem.Groups != null && subItem.Groups.Count > 0 ? "disabled" : "")"
+									   aria-hidden="true">
+									</span>
+								</li>
+							}
+						</ul>
+					</div>
+				}
+			</li>
+		}
+	</ul>
+</nav>
+
+
+@code{
+
+}

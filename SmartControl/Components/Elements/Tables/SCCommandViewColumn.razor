@@ -1,0 +1,44 @@
+﻿@inherits DxGridCommandColumn
+@base.BuildRenderTree
+
+@code {
+
+    /// <summary>
+    /// Command per Grid che invoca il comando di Edit
+    /// </summary>
+    
+    //Grid for Blazor - How to create reusable DxGridCommandColumn
+    //https://supportcenter.devexpress.com/ticket/details/t1135370/grid-for-blazor-how-to-create-reusable-dxgridcommandcolumn
+
+    [CascadingParameter] public IGrid ParentGrid { get; set; }
+
+    [Parameter] public Func<GridCommandColumnCellDisplayTemplateContext, bool> ShowCommand { get; set; } = (context) => true;
+
+    protected override bool ShouldRender() => false;
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        ParentGrid ??= this.Parent as IGrid;
+
+        if (ParentGrid != null)
+        {
+
+        Width = "30px";
+        ClearFilterButtonVisible = false;
+        HeaderTemplate = context => @<text></text>;
+        CellDisplayTemplate = context =>
+            @<text>
+                 @if (ShowCommand(context))
+                 {
+                     <a @onclick="@(() => ParentGrid.StartEditRowAsync(context.VisibleIndex))" style="text-decoration: none;" href="javascript:void(0);">
+            <i class="oi oi-magnifying-glass"></i>
+                     </a>
+                 }
+                
+             </text>;
+        }
+    }
+}

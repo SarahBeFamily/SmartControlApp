@@ -5,15 +5,16 @@
 		private static readonly Lazy<List<MenuItemGroup>> menuItemGroups = new(() =>
 		{
 		List<MenuItemGroup> settingGroups = [
-			new MenuItemGroup("Funzioni da analista", "icon-nav icon-edit-3", "images/edit-3.svg", "#",
+            // Etichetta | url | LongDescription | icona css | icona svg | Sottomenu (opzionale)
+			new MenuItemGroup("Funzioni da analista", "#", "", "icon-nav icon-edit-3", "Assets/images/SidebarMenu/edit-3.svg",
 				[
-					new("Voce sottomenù", "", "", "/voce"),
-                    new("Voce sottomenù", "", "", "/voce"),
+					new("Voce sottomenù", "/voce"),
+                    new("Voce sottomenù", "/voce"),
                 ]),
-			new MenuItemGroup("Parametri di sistema", "icon-nav icon-settings", "images/settings.svg", "#",
+			new MenuItemGroup("Parametri di sistema", "#", "", "icon-nav icon-settings", "Assets/images/SidebarMenu/settings.svg",
 				[
-                    new("Voce sottomenù", "", "", "/voce"),
-                    new("Voce sottomenù", "", "", "/voce"),
+                    new("Voce sottomenù","/voce"),
+                    new("Voce sottomenù", "/voce"),
                 ])
             ];
             return settingGroups;

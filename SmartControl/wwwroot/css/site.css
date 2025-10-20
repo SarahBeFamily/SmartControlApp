@@ -24,6 +24,9 @@
     --giallo: #FF9C07;
     --dark-gray: #46413C;
     --rosso: #DC3545;
+    --bs-body-bg: var(--light-gray) !important;
+    --dxbl-popup-bg: var(--light-gray) !important;
+    --bs-font-sans-serif: var(--font-text) !important;
     --bs-primary: var(--primary-color) !important;
     --bs-primary-rgb: var(--rgb-primary-color) !important;
     --bs-body-color: var(--dark) !important;
@@ -120,13 +123,13 @@ html, body {
     letter-spacing: 0rem;
 }
 
-.main-content {
+/*.main-content {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
-}
+}*/
 
 .block-content {
     width: 31.25rem;

@@ -1,0 +1,132 @@
+<div class="sc-card @Classes @(FullHeight? "full-h":"") ">
+    @if (Classes.Contains("card-alt"))
+    {
+        <div class="flex flex-column align-start">
+            <div class="flex flex-column align-start">
+                <span class="category">@Category</span>
+                <h4 class="card-title">@Title</h4>
+                <p>@Text</p>
+            </div>
+
+            <a href="@Link" class="white with-chevron">@LinkText</a>
+        </div>
+
+        <div class="wrap-icon">
+            <i class="@Icon"></i>
+        </div>
+    } else if (Classes.Contains("with-child"))
+    {
+
+        <h6 class="card-title">@Title</h6>
+        <div>
+            @ChildContent
+        </div>
+    }
+    else if (Classes.Contains("card-wrap"))
+    {
+        @ChildContent
+    }
+    else
+	{
+        <div>
+            @if (Classes.Contains("wheels"))
+            {
+                <div class="with-frame @Icon">
+					<i></i>
+                </div>
+            } else 
+            {
+                if(!string.IsNullOrEmpty(Icon))
+                {
+                    <div class="with-frame">
+                       <i class="@Icon"></i>
+                    </div>
+                }
+			}
+
+            <h4 class="card-title">@Title</h4>
+
+            @if (!string.IsNullOrEmpty(Text))
+            {
+				<p class="card-text">@Text</p>
+			}
+        </div>
+
+        <div class="data">
+            <span class="main-data">
+                @MainData
+
+                @if (!string.IsNullOrEmpty(Um))
+				{
+                    <span class="um">@Um</span>
+                    }
+            </span>
+
+            @if (!string.IsNullOrEmpty(Percentage) && !string.IsNullOrEmpty(Year))
+            {
+			    <p class="font-titles text-uppercase flex-inline">
+				    <span class="percentage">@Percentage</span> <span>rispetto al <span class="year">@Year</span></span>
+                </p>
+		    }
+
+            @if (!string.IsNullOrEmpty(TextAlt))
+            {
+                <p class="font-titles">@TextAlt</p>
+            }
+        
+        </div>
+    }
+
+</div>
+
+@code {
+    // Classi aggiuntive:
+    // - "card-alt" per card a due colonne con icona a destra
+    // - "dark" per versione scura
+    // - "wheels" per versione con ruote
+    // - "with-child" per card con altro contenuto o componente all'interno
+    // - "card-wrap" per card con altre card all'interno
+    // - "card-col" per card in colonna
+    // - "full-h" per card a tutta altezza
+
+    [Parameter]
+    public string Classes { get; set; } = "";
+
+	[Parameter]
+	public string? Icon { get; set; }
+
+	[Parameter]
+	public string? Title { get; set; }
+
+    [Parameter]
+    public string? Text { get; set; }
+
+    [Parameter]
+    public string? MainData { get; set; }
+
+    [Parameter]
+    public string? Um { get; set; }
+
+    [Parameter]
+    public string? Percentage { get; set; }
+
+    [Parameter]
+    public string? TextAlt { get; set; }
+
+    [Parameter]
+    public string? Year { get; set; }
+
+    [Parameter]
+    public string? Category { get; set; }
+
+    [Parameter]
+    public string? Link { get; set; }
+
+    [Parameter]
+    public string? LinkText { get; set; }
+
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public bool FullHeight { get; set; } = true;
+}

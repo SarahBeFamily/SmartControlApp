@@ -6,7 +6,7 @@
 
 namespace SmartControl.Components.Elements
 {
-    public partial class SC_LayoutColumns
+    public partial class SCLayoutColumns
     {
         [Parameter] public string? Subtitle { get; set; }
         [Parameter] public string? CssClass { get; set; }

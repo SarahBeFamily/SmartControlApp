@@ -2,6 +2,7 @@
 @inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JS
+@using SmartControl.Components.Elements.Menu
 
 <DxLayoutBreakpoint DeviceSize="DeviceSize.XSmall" @bind-IsActive="@isXSmallScreen" />
 
@@ -11,15 +12,16 @@
 
         @if (isXSmallScreen)
         {
-            <div id="ham" onclick="(document.getElementById('sidebar').classList.toggle('auto-expanded'));(this.classList.toggle('open'))">
+            <div id="ham" onclick="(document.getElementById('sidebar').classList.toggle('collapsed'));(this.classList.toggle('open'))">
                 <i class="bi bi-list"></i>
                 <i class="bi bi-x"></i>
             </div>
         } else
 		{
             <div id="brand-image">
-                <div class="menu-button" onclick="(document.getElementById('sidebar').classList.toggle('auto-expanded'))">
-                    <img src="images/Logo_SmartControl.svg" alt="SmartControl" class="brand-image" width="39" height="48" />
+                <div class="menu-button" onclick="(document.getElementById('sidebar').classList.toggle('collapsed'));(document.getElementById('brand-image').classList.toggle('collapsed'))">
+                    <img src="Assets/images/Loghi/Logo_SmartControl.svg" alt="SmartControl" class="brand-image" width="220" height="29" />
+                    <img src="Assets/images/Loghi/Logotipo_SmartControl.svg" alt="SmartControl" class="brand-image collapsed" width="49" height="30" />
                 </div>
             </div>
 		}
@@ -27,14 +29,12 @@
         <div class="w-100 nav-buttons-container">
 
             <!-- PROVVISORIO: per me che non ho l'accesso -->
+
+            <SCTopMenu></SCTopMenu>
             
             <div id="user-area">
                 <div class="menu-button d-flex align-items-center" onclick="(document.getElementById('user-dropdown-panel').classList.toggle('open'))" onmouseover="(document.getElementById('user-dropdown-panel').classList.add('open'))">
                     <div class="user-image"><i class="bi bi-person-fill"></i></div>
-                    <div class="user-info d-flex flex-column mx-3">
-                        <span class="email">mail@mail.it</span>
-                        <span class="company">Azienda</span>
-                    </div>
                 </div>
 
                 <div id="user-dropdown-panel" class="dropdown-area" onmouseleave="(this.classList.remove('open'))">
@@ -79,7 +79,7 @@
     </header>
 
     @{
-        var sidebarClass = isXSmallScreen ? "auto-expanded" : "";
+        var sidebarClass = isXSmallScreen ? "collapsed" : "";
         var flexWrap = isXSmallScreen ? " flex-wrap" : "";
     }
 
@@ -88,20 +88,24 @@
 
             @* To Do: creare componente per questo blocco *@
             <div class="company flex">
-                <img src="images/company-sidebar.png" alt="" />
-                <div class="info">
+                <img src="Assets/images/Loghi/company-sidebar.png" alt="" />
+                <div class="info flex flex-column">
                     <span class="name">Credipass srl</span>
 					<span class="role">Hgroup</span>
                 </div>
             </div>
 
-            <SC_Divider></SC_Divider>
+            <SCDivider></SCDivider>
 
-            <SC_Menu Menu="main"></SC_Menu>
+            <SCMenu Menu="main"></SCMenu>
 
-            <SC_Divider></SC_Divider>
+            <SCDivider></SCDivider>
 
-            <SC_Menu Menu="settings"></SC_Menu>
+            <SCMenu Menu="settings"></SCMenu>
+
+            <button id="sidebar-collapse-btn" class="menu-button" onclick="(document.getElementById('sidebar').classList.toggle('collapsed'));(document.getElementById('brand-image').classList.toggle('collapsed'));(document.querySelector('#brand-image .menu-button').classList.toggle('collapsed'))">
+				<i class="icon-chevron-left"></i>
+            </button>
         </div>
 
         <div class="main-content">

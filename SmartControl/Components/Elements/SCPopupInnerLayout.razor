@@ -1,0 +1,24 @@
+﻿@if(ChildContentLeft == null && ChildContentRight == null)
+{
+	<div class="BorderBase PopUpBorder">
+		@ChildContent
+	</div>
+}
+else
+{
+	<div class="split">
+		 <div class="BorderBase PopUpBorder left">
+			@ChildContentLeft
+		 </div>
+		 <div class="right">
+			@ChildContentRight
+		 </div>
+	</div>
+}
+
+@code {
+	[Parameter] public RenderFragment? ChildContent { get; set; }
+	[Parameter] public RenderFragment? ChildContentLeft { get; set; }
+	[Parameter] public RenderFragment? ChildContentRight { get; set; }
+}
+

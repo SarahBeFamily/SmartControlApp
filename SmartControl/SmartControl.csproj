@@ -5,10 +5,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Components\Layout\SC_Menu - Copia.razor.cs" />
     <Compile Remove="Components\Layout\SC_Menu.razor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Components\Layout\SC_Menu.razor.cs" />
+    <Content Include="Components\Elements\Menu\SCMenu.razor.cs" />
   </ItemGroup>
 
   <ItemGroup>

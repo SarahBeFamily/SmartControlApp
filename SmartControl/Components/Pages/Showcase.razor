@@ -1,0 +1,309 @@
+﻿@page "/showcase"
+@rendermode InteractiveServer
+@using SmartControl.Components.Layout
+@using SmartControl.Components.Elements.Buttons
+@using SmartControl.Components.Elements.Tables
+
+<h1>Showcase</h1>
+
+
+<h2>Bottoni</h2>
+<div class="d-flex gap-1 my-3">
+    <SCButton RenderStyle="Primary" Icon="bi bi-1-circle-fill" Text="Popup small" OnClick="OpenPopupSmall" />
+    <SCButton RenderStyle="Secondary" Icon="bi bi-2-circle-fill" Text="Popup medium" OnClick="OpenPopupMedium" />
+    <SCButton RenderStyle="Primary" Text="Popup big" OnClick="OpenPopupBig" />
+</div>
+
+<SCLayoutColumns Subtitle="Layout con Card (colonne 1+4)">
+    <SCInnerColumn ColumnWidth1>
+        <SCCard Classes="card-col" Title="Titolo Card" Text="Testo" FullHeight="false"></SCCard>
+        <SCCard Classes="card-col" Title="Titolo Card" Text="Testo" FullHeight="false"></SCCard>
+    </SCInnerColumn>
+    <SCInnerColumn ColumnWidth4>
+        <SCCard Classes="with-child" Title="Quantità raccolta per mese">
+            <DxChart Data="@dataSource">
+                <DxChartCommonSeries NameField="@((SaleInfo s) => s.Date.Year)"
+                                     ArgumentField="@((SaleInfo s) => s.City)"
+                                     ValueField="@((SaleInfo s) => s.Amount)"
+                                     SeriesType="ChartSeriesType.Bar"
+                                     SummaryMethod="Enumerable.Max">
+                </DxChartCommonSeries>
+            </DxChart>
+        </SCCard>
+    </SCInnerColumn>
+</SCLayoutColumns>
+
+<SCLayoutColumns Subtitle="Layout con Card (colonne 2+1+1+1)">
+    <SCInnerColumn ColumnWidth2>
+        <SCCard Classes="card-alt"
+              Category="Documenti"
+              Title="Archivio Fir"
+              Text=">Hai bisogno di visionare rapidamente i tuoi documenti?"
+              Link="#"
+              LinkText="Visualizzali tutti"
+              Icon="bi bi-airplane-fill">
+        </SCCard>
+    </SCInnerColumn>
+    <SCInnerColumn ColumnWidth1>
+        <SCCard Title="Titolo Card" Text="Con icona" Icon="icon-weight" />
+    </SCInnerColumn>
+    <SCInnerColumn ColumnWidth1>
+        <SCCard Title="Titolo Card" Text="Con icona" Icon="bi-alarm"></SCCard>
+    </SCInnerColumn>
+    <SCInnerColumn ColumnWidth1>
+        <SCCard Title="Titolo Card" Text="Testo full h"></SCCard>
+    </SCInnerColumn>
+</SCLayoutColumns>
+
+
+
+<h1>Tabella e Filtri</h1>
+
+@* <SCHeaderNavigator @bind-SearchText="@SearchText" @bind-ShowFilterRow="@ShowFilterRow">
+    <Tabs>
+        <SCHeaderNavigatorTab Text="Ricambio" FlyOutText="@FlyoutText"></SCHeaderNavigatorTab>
+    </Tabs>
+    <Filters>
+        <SCHeaderNavigatorFilter Text="Assegnata" BadgeNumber="27" />
+        <SCHeaderNavigatorFilter Text="In lavorazione" Active="true" />
+        <SCHeaderNavigatorFilter Text="Blocco per quote" BadgeNumber="100" />
+        <SCHeaderNavigatorFilter Text="Sospesa" BadgeNumber="6" />
+        <SCHeaderNavigatorFilter>
+            <DxComboBox NullText="Seleziona..."
+                        FilteringMode="DataGridFilteringMode.Contains"
+                        TextFieldName="@nameof(Location.RagioneSociale)"
+                        Data="@Locations"
+                        Value="@Trasportatore" />
+        </SCHeaderNavigatorFilter>
+    </Filters>
+
+</SCHeaderNavigator>
+
+<SCHeaderNavigator>
+    <Tabs>
+        <SCHeaderNavigatorTab Text="Ricambio" FlyOutText="@FlyoutText"></SCHeaderNavigatorTab>
+    </Tabs>
+
+    <Content>
+        <DxFormLayout>
+            <SCComboBoxLabel Label="Anno" CssClass="anno">
+                <DxComboBox Data="@Anni" Value="@Anni" NullText="2024" />
+            </SCComboBoxLabel>
+
+            <SCComboBoxLabel Label="Sede" Icon="bi bi-building-fill">
+                <DxComboBox Data="@Sedi" Value="@Sedi" NullText="Tutte" />
+            </SCComboBoxLabel>
+        </DxFormLayout>
+    </Content>
+</SCHeaderNavigator> *@
+
+<DxGrid Data="@FIRs"
+        @ref="GridFir"
+        ShowFilterRow="@ShowFilterRow"
+        ShowGroupPanel="true"
+        ShowSearchBox="false"
+        SearchText="@SearchText"
+        ColumnResizeMode="GridColumnResizeMode.NextColumn"
+        EditMode="GridEditMode.PopupEditForm">
+    <Columns>
+        <SCCommandEditColumn></SCCommandEditColumn>
+        <SCCommandViewColumn></SCCommandViewColumn>
+        <SCCommandDeleteColumn></SCCommandDeleteColumn>
+        <DxGridCommandColumn Caption="Action" Width="30px" ClearFilterButtonVisible="false">
+            <HeaderTemplate>Azione</HeaderTemplate>
+            <CellDisplayTemplate>
+                <div><i class="oi oi-pencil" style="color:blue;" @onclick="@(() => GridFir.StartEditDataItemAsync(context.DataItem))"></i></div>
+            </CellDisplayTemplate>
+        </DxGridCommandColumn>
+        <DxGridDataColumn FieldName="Ticket" />
+        <DxGridDataColumn FieldName="DataRichiesta" Caption="@("Data richiesta")" DisplayFormat="dd/MM/yyyy" />
+        <DxGridDataColumn FieldName="DataRitiro" Caption="@("Data ritiro")" DisplayFormat="dd/MM/yyyy" />
+        <DxGridDataColumn FieldName="Qty" Caption="@("Quantità")" />
+        <DxGridDataColumn FieldName="Indirizzo" />
+        <DxGridCommandColumn Caption="Stato" ClearFilterButtonVisible="false">
+            <HeaderTemplate>Stato</HeaderTemplate>
+            <CellDisplayTemplate>
+                <SCBadge Label="Assegnata" ColorYellow="true" />
+            </CellDisplayTemplate>
+        </DxGridCommandColumn>
+    </Columns>
+    <DetailRowTemplate>
+        <text>Note di dettaglio della riga</text>
+    </DetailRowTemplate>
+    <EditFormTemplate Context="editContext">
+        <DxFormLayout CaptionPosition="CaptionPosition.Vertical">
+            <DxFormLayoutItem Caption="Data richiesta" ColSpanMd="4">
+                @editContext.GetEditor("DataRichiesta")
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Data" ColSpanMd="4">
+                @editContext.GetEditor("DataRitiro")
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Qty" ColSpanMd="4">
+                @editContext.GetEditor("Qty")
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Indirizzo" ColSpanMd="8" BeginRow="true">
+                @editContext.GetEditor("Indirizzo")
+            </DxFormLayoutItem>
+            <DxFormLayoutItem Caption="Ruoli" ColSpanMd="12">
+                <DxTagBox Data="@Model.Ruoli"
+                          @bind-Values="@Model.RuoliAttivi" />
+            </DxFormLayoutItem>
+        </DxFormLayout>
+    </EditFormTemplate>
+</DxGrid>
+<DxPopup @bind-Visible="@PopupVisible"
+		 ShowCloseButton="true"
+         CssClass="@PopupClass"
+         HeaderText="Dettaglio"
+         BodyText="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sit amet metus vel
+             nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor,
+             imperdiet mauris. Fusce id purus magna."
+         ShowFooter="true">
+    <FooterContentTemplate>
+        <DxButton RenderStyle="ButtonRenderStyle.Primary" Text="OK"
+                  Click="@context.CloseCallback" />
+    </FooterContentTemplate>
+</DxPopup>
+
+
+<h1>Form con validazione</h1>
+<EditForm Model="@Model" Context="formContext">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <DxFormLayout CaptionPosition="CaptionPosition.Vertical">
+
+        <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
+            <DxTextBox @bind-Text="@Model.TestoObbligatorio" NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
+            <DxTextBox @bind-Text="@Model.Facoltativo" NullText="Facoltativo" ></DxTextBox>
+        </DxFormLayoutItem>
+
+        <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
+            <DxTextBox NullText="Readonly" @bind-Text="@Model.ReadOnlyText" ReadOnly="true"></DxTextBox>
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Caption="DxCheckBox" ColSpanMd="4">
+            <DxCheckBox @bind-Checked="@Selezionato">Multimedia</DxCheckBox>
+        </DxFormLayoutItem>
+
+
+        <DxFormLayoutItem Caption="DxDateEdit" ColSpanMd="4">
+            <DxDateEdit @bind-Date="@DateTimeValue"></DxDateEdit>
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Caption="DxComboBox" ColSpanMd="4">
+            <DxComboBox Data="@FIRs"
+                        TextFieldName="@nameof(FIR.Indirizzo)"
+                        ValueFieldName="@nameof(FIR.Ticket)"
+                        NullText="Seleziona..."
+                        ClearButtonDisplayMode="DataEditorClearButtonDisplayMode.Auto"
+                        @bind-Value="@Ticket" />
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Caption="DxSpinEdit" ColSpanMd="4">
+            <DxSpinEdit @bind-Value="@Quantita" DisplayFormat="N2" Mask="N2" />
+        </DxFormLayoutItem>
+        <DxFormLayoutItem Caption="Ruoli" ColSpanMd="6">
+            <DxTagBox Data="@Model.Ruoli"
+                      @bind-Values="@Model.RuoliAttivi" />
+        </DxFormLayoutItem>
+
+        <DxFormLayoutGroup Caption="Viaggio">
+            <DxFormLayoutItem Caption="Destinatario" ColSpanMd="6">
+                <DxComboBox Data="@Locations"
+                            EditFormat="{0}, {1} {2}"
+                            ValueFieldName="@nameof(Location.RagioneSociale)"
+                            @bind-Value="@Trasportatore">
+                    <Columns>
+                        <DxListEditorColumn FieldName="@nameof(Location.RagioneSociale)" Caption="RagioneSociale" />
+                        <DxListEditorColumn FieldName="@nameof(Location.Indirizzo)" Caption="Indirizzo" />
+                        <DxListEditorColumn FieldName="@nameof(Location.Citta)" Caption="Citta" />
+                    </Columns>
+                </DxComboBox>
+            </DxFormLayoutItem>
+
+        </DxFormLayoutGroup>  
+        <DxFormLayoutItem CssClass="align-right" ColSpanMd="12">
+            <DxButton Text="Salva" SubmitFormOnClick="true"></DxButton>
+        </DxFormLayoutItem>
+    </DxFormLayout>
+
+
+</EditForm>
+
+<h1>Editor senza validazione</h1>
+<DxFormLayout>
+    <DxFormLayoutItem ColSpanMd="6">
+        <DxTextBox @bind-Text="@Model.TestoObbligatorio"></DxTextBox>
+    </DxFormLayoutItem>
+    <DxFormLayoutItem ColSpanMd="6">
+        <DxTextBox @bind-Text="@Model.Facoltativo"></DxTextBox>
+    </DxFormLayoutItem>
+</DxFormLayout>
+
+<h1>Alert</h1>
+
+<DxFormLayout>
+    <DxFormLayoutItem>
+        <div class="alert alert-primary" role="alert">
+            A simple primary alert—check it out!
+        </div>
+        <div class="alert alert-secondary" role="alert">
+            A simple secondary alert—check it out!
+        </div>
+        <div class="alert alert-success" role="alert">
+            A simple success alert—check it out!
+        </div>
+        <div class="alert alert-danger" role="alert">
+            A simple danger alert—check it out!
+        </div>
+        <div class="alert alert-warning" role="alert">
+            A simple warning alert—check it out!
+        </div>
+        <div class="alert alert-info" role="alert">
+            A simple info alert—check it out!
+        </div>
+        <div class="alert alert-light" role="alert">
+            A simple light alert—check it out!
+        </div>
+        <div class="alert alert-dark" role="alert">
+            A simple dark alert—check it out!
+        </div>
+        </DxFormLayoutItem>
+    
+</DxFormLayout>
+
+<h1>Form con badge AI</h1>
+
+<DxFormLayout>
+    
+	    <DxFormLayoutItem ColSpanMd="4" CssClass="flex-column">
+            <CaptionTemplate>
+                <SCAiContent Label="DxTextBox" AiText="accuratezza 98%" Result="High"></SCAiContent>
+            </CaptionTemplate>
+            <Template>
+		        <DxTextBox @bind-Text="@Model.TestoObbligatorio" NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
+            </Template>
+	    </DxFormLayoutItem>
+    
+        <DxFormLayoutItem ColSpanMd="4" CssClass="flex-column">
+            <CaptionTemplate>
+                <SCAiContent Label="DxTextBox" AiText="accuratezza 88%" Result="Medium"></SCAiContent>
+            </CaptionTemplate>
+            <Template>
+                <DxTextBox NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
+            </Template>
+        </DxFormLayoutItem>
+
+    <DxFormLayoutItem ColSpanMd="4" CssClass="flex-column">
+        <CaptionTemplate>
+            @* <SCAiContent Label="DxTextBox" AiText="accuratezza 38%" Result="Low"></SCAiContent> *@
+        </CaptionTemplate>
+        <Template>
+            <DxTextBox NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
+        </Template>
+    </DxFormLayoutItem>
+
+    @* <SCAiContent AiText="accuratezza 88%" Result="Medium" ColSpanMd="4">
+        <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
+            <DxTextBox></DxTextBox>
+        </DxFormLayoutItem>
+    </SCAiContent> *@
+</DxFormLayout>

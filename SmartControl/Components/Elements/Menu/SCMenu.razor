@@ -14,14 +14,14 @@
 			var liId = (item.Name).ToLower().Replace(" ", "-");
 			var notUrl = '#';
 			var url = item.NavigateUrl != notUrl.ToString() ? item.NavigateUrl : string.Empty;
-			var active = url == NavigationManager.ToBaseRelativePath(NavigationManager.Uri).TrimEnd('/').ToLower() ? "active" : "";
+			var active = url == NavigationManager.ToBaseRelativePath(NavigationManager.Uri).TrimEnd('/').ToLower().ToString() ? "active" : "";
 			var activeSub = item.Groups != null && item.Groups.Any(x => x.NavigateUrl == (NavigationManager.ToBaseRelativePath(NavigationManager.Uri)).ToString()) ? "active" : "";
 			var show = activeSub == "active" ? "show" : "";
 
 			<li id="@liId" class="@active @activeSub">
 				<div class="li-wrap @show" onclick="document.querySelector('#sub-@liId').classList.toggle('show');
 													document.querySelector('#@liId').classList.toggle('open');
-													document.getElementById('sidebar').classList.remove('auto-expanded');">
+													document.getElementById('sidebar').classList.remove('collapsed');">
 					<i class="@item.IconCssClass"></i>
 					<a href="@item.NavigateUrl" class="@(item.Groups != null && item.Groups.Count > 0 ? "" : "no-group")">
 						<span>@item.Name</span>
@@ -78,7 +78,6 @@
 
 
 @code{
-	[Parameter] public string Menu { get; set; } = "main";
 	protected override void OnInitialized()
 	{
 		NavigationManager.LocationChanged += OnLocationChanged;
