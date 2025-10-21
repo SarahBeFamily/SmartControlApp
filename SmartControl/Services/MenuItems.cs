@@ -6,7 +6,7 @@
         {
             List<MenuItemGroup> groups = [
                 // Ho cambiato l'ordine delle voci del menu per una migliroe gestione, inserendo prima i dati obbligatori
-                // Nome | url | LongDescription | IconCssClass | IconUrl | Sottomenu (opzionale)
+                // Etichetta | url | LongDescription | icona css | icona svg | Sottomenu (opzionale) | item Class (opzionale)
                 new MenuItemGroup("Dashboard", "/dashboard", "", "icon-nav icon-dashboard", "Assets/images/Icon/SidebarMenu/Dashboard.svg"),
                 new MenuItemGroup("Story Telling", "/showcase", "", "icon-nav icon-play-circle", "Assets/images/Icon/SidebarMenu/play-circle.svg"),
                 new MenuItemGroup("Analisi di bilancio", "#", "", "icon-nav icon-pie-chart", "Assets/images/Icon/SidebarMenu/pie-chart.svg",

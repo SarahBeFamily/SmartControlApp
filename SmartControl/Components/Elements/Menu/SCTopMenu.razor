@@ -1,13 +1,13 @@
-<nav id="sc-top-menu">
+<nav id="sc-top-menu" class="flex items-center">
 	<ul class="sc-top-menu flex">
-		@foreach (var item in MenuTopItems.Groups)
+		@foreach (var item in SCTopMenu.Groups)
 		{
 			var liId = (item.Name).ToLower().Replace(" ", "-");
 
-			<li id="@liId" class="">
+			<li id="@liId" class="@item.ItemClass">
 				<div class="li-wrap">
-					<i class="@item.IconCssClass"></i>
 					<a href="@item.NavigateUrl" class="@(item.Groups != null && item.Groups.Count > 0 ? "" : "no-group")">
+						<i class="@item.IconCssClass"></i>
 						<span>@item.Name</span>
 					</a>
 					<span class="action-submenu icon-chevron-right @(item.Groups != null && item.Groups.Count > 0 ? "" : "disabled")" 
@@ -25,7 +25,7 @@
 								var subLiId = (subItem.Name).ToLower().Replace(" ", "-");
 								var hasSubMenu = subItem.Groups != null && subItem.Groups.Count > 0 ? "has-submenu" : "";
 								
-								<li id="@subLiId" class="@hasSubMenu">
+								<li id="@subLiId" class="@hasSubMenu @subItem.ItemClass">
 									<a href="@subItem.NavigateUrl" onclick="document.querySelector('#sub-@subLiId').classList.toggle('show');
 											document.querySelector('#@subLiId').classList.toggle('open');">
 										@subItem.Name
@@ -43,8 +43,3 @@
 		}
 	</ul>
 </nav>
-
-
-@code{
-
-}

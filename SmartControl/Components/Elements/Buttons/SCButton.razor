@@ -5,11 +5,32 @@
 	var IconTextClass = Icon != null && Text != null ? "icon-text" : "";
 }
 
-<button class="sc-button @CssClass @IconOnlyClass @IconTextClass" render-style="@RenderStyle" @onclick="OnClick" aria-describedby="@FlyoutlabelledBy">
-	@if (Icon != null) {
-		<i class="@Icon @FlyoutClass"></i>
-	}
-	@if (Text != null) {
-		<span class="@FlyoutClass">@Text</span>
-	}
-</button>
+@if (RenderStyle == "link")
+{
+	<a class="sc-button @CssClass @IconOnlyClass @IconTextClass" 
+		href="@Url" 
+		aria-describedby="@FlyoutlabelledBy"
+		@onclick="OnClick"
+	>
+		@if (Icon != null) {
+			<i class="@Icon @FlyoutClass"></i>
+		}
+		@if (Text != null) {
+			<span class="@FlyoutClass">@Text</span>
+		}
+	</a>
+} else {
+	<button class="sc-button @CssClass @IconOnlyClass @IconTextClass" 
+		render-style="@RenderStyle" 
+		@onclick="OnClick" 
+		aria-describedby="@FlyoutlabelledBy"
+		@if(SubmitFormOnClick) { type="submit" }
+	>
+		@if (Icon != null) {
+			<i class="@Icon @FlyoutClass"></i>
+		}
+		@if (Text != null) {
+			<span class="@FlyoutClass">@Text</span>
+		}
+	</button>
+}

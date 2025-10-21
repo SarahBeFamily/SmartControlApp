@@ -2,7 +2,6 @@
 @inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JS
-@using SmartControl.Components.Elements.Menu
 
 <DxLayoutBreakpoint DeviceSize="DeviceSize.XSmall" @bind-IsActive="@isXSmallScreen" />
 
@@ -28,50 +27,29 @@
 
         <div class="w-100 nav-buttons-container">
 
-            <!-- PROVVISORIO: per me che non ho l'accesso -->
-
             <SCTopMenu></SCTopMenu>
-            
-            <div id="user-area">
-                <div class="menu-button d-flex align-items-center" onclick="(document.getElementById('user-dropdown-panel').classList.toggle('open'))" onmouseover="(document.getElementById('user-dropdown-panel').classList.add('open'))">
-                    <div class="user-image"><i class="bi bi-person-fill"></i></div>
-                </div>
 
-                <div id="user-dropdown-panel" class="dropdown-area" onmouseleave="(this.classList.remove('open'))">
+            <SCHeaderUserArea>
+                <SCUsernameRoleData NomeUtente="Sarah Pinna" RuoloUtente="Dev"></SCUsernameRoleData>
 
-                    <form action="Account/Logout" method="get" class="display-desktop">
-                        <AntiforgeryToken />
-                        <DxButton RenderStyle="@ButtonRenderStyle.Link" CssClass="menu-button"  SubmitFormOnClick="true" Text="Esci" RenderStyleMode="@ButtonRenderStyleMode.Text"></DxButton>
-                    </form>
-                </div>
-            </div>
+                <SCDivider></SCDivider>
 
-            <!-- DEFINITIVO: utente già loggato -->
-            
-            @* <AuthorizeView>
-                <Authorized>
-                    <button class="rounded-button" @onclick="OpenNotifications"><i class="icon-notification"></i></button>
+                <SCButton Icon="icon-user" Text="Il mio profilo" CssClass="menu-button display-desktop" RenderStyle="link" Url="#"></SCButton>
+                <SCButton Icon="icon-cloud" Text="Gestione istanza" CssClass="menu-button display-desktop" RenderStyle="link" Url="#"></SCButton>
 
-                    <div id="user-area">
-                        <div class="menu-button d-flex align-items-center">
-                            <div class="user-image" onclick="(document.getElementById('user-dropdown-panel').classList.toggle('open'))"><i class="bi bi-person-fill"></i></div>
-                            <div class="user-info d-flex flex-column mx-3">
-                                <span class="email">i.modenin@axxelera.it</span>
-                                <span class="company">Azienda</span>
-                            </div>
-				        </div>
+                <form action="Account/Logout" method="get" class="display-desktop">
+                    <AntiforgeryToken />
+                    <SCButton Icon="icon-logout" Text="Log out" CssClass="menu-button display-desktop" SubmitFormOnClick="true"></SCButton>
+                   @*  <DxButton RenderStyle="@ButtonRenderStyle.Link" CssClass="menu-button icon-button icon-logout"  SubmitFormOnClick="true" Text="Log out" RenderStyleMode="@ButtonRenderStyleMode.Text"></DxButton> *@
+                </form>
 
-                        <div id="user-dropdown-panel" class="dropdown-area">
-                            <DxButton RenderStyle="@ButtonRenderStyle.Link" CssClass="menu-button" NavigateUrl="Account/Manage" Text="Profilo" RenderStyleMode="@ButtonRenderStyleMode.Text"></DxButton>
-                            <form action="Account/Logout" method="post" class="display-desktop">
-                                <AntiforgeryToken />
-                                <input type="hidden" name="ReturnUrl" value="@currentUrl" />
-                                <DxButton RenderStyle="@ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Esci" RenderStyleMode="@ButtonRenderStyleMode.Text"></DxButton>
-                            </form>
-                        </div>
-                    </div>
-                </Authorized>
-            </AuthorizeView> *@
+                <SCDivider></SCDivider>
+
+                <SCButton Icon="icon-wiki" Text="Wiki" CssClass="menu-button external-url" RenderStyle="link" Url="#"></SCButton>
+                <SCButton Icon="icon-blog" Text="Blog" CssClass="menu-button external-url" RenderStyle="link" Url="#"></SCButton>
+                <SCButton Icon="icon-globe" Text="Sito web" CssClass="menu-button external-url" RenderStyle="link" Url="#"></SCButton>
+
+            </SCHeaderUserArea>
 
         </div>
 

@@ -1,0 +1,39 @@
+﻿
+<div id="user-area">
+    <div class="menu-button d-flex align-items-center" onclick="(document.getElementById('user-dropdown-panel').classList.toggle('open'))" onmouseover="(document.getElementById('user-dropdown-panel').classList.add('open'))">
+        <div class="user-image"><i class="bi bi-person-fill"></i></div>
+    </div>
+
+    <div id="user-dropdown-panel" class="dropdown-area" onmouseleave="(this.classList.remove('open'))">
+
+        @ChildContent
+
+    </div>
+</div>
+
+            <!-- DEFINITIVO: utente già loggato -->
+            
+            @* <AuthorizeView>
+                <Authorized>
+                    <button class="rounded-button" @onclick="OpenNotifications"><i class="icon-notification"></i></button>
+
+                    <div id="user-area">
+                        <div class="menu-button d-flex align-items-center">
+                            <div class="user-image" onclick="(document.getElementById('user-dropdown-panel').classList.toggle('open'))"><i class="bi bi-person-fill"></i></div>
+                            <div class="user-info d-flex flex-column mx-3">
+                                <span class="email">i.modenin@axxelera.it</span>
+                                <span class="company">Azienda</span>
+                            </div>
+				        </div>
+
+                        <div id="user-dropdown-panel" class="dropdown-area">
+                            <DxButton RenderStyle="@ButtonRenderStyle.Link" CssClass="menu-button" NavigateUrl="Account/Manage" Text="Profilo" RenderStyleMode="@ButtonRenderStyleMode.Text"></DxButton>
+                            <form action="Account/Logout" method="post" class="display-desktop">
+                                <AntiforgeryToken />
+                                <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                                <DxButton RenderStyle="@ButtonRenderStyle.Link" SubmitFormOnClick="true" Text="Esci" RenderStyleMode="@ButtonRenderStyleMode.Text"></DxButton>
+                            </form>
+                        </div>
+                    </div>
+                </Authorized>
+            </AuthorizeView> *@

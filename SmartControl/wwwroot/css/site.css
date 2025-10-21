@@ -18,12 +18,15 @@
     --font-text: 'DM Sans', sans-serif;
     --font-titles: 'Archivo', sans-serif;
     --Neutral-Input-Text: #CED4FF;
+    --text-light: #CED4FF;
     --icon-color: #CED4FF;
+    --Blue-hover: #0D47A1;
     --grigio: #ccc;
     --verde: #198754;
     --giallo: #FF9C07;
     --dark-gray: #46413C;
-    --rosso: #DC3545;
+    --rosso: #B71C1C;
+    --Status-Error: #B71C1C;
     --bs-body-bg: var(--light-gray) !important;
     --dxbl-popup-bg: var(--light-gray) !important;
     --bs-font-sans-serif: var(--font-text) !important;
@@ -144,6 +147,7 @@ html, body {
 .flex-column { flex-direction: column;}
 .flex-row { flex-direction: row;}
 .flex-center { justify-content: center; align-items: center;}
+.items-center { align-items: center; }
 .flex-between { justify-content: space-between;}
 .align-start { align-items: flex-start;}
 .mb-30 { margin-bottom: 30px;}

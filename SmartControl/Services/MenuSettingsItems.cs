@@ -5,7 +5,7 @@
 		private static readonly Lazy<List<MenuItemGroup>> menuItemGroups = new(() =>
 		{
 		List<MenuItemGroup> settingGroups = [
-            // Etichetta | url | LongDescription | icona css | icona svg | Sottomenu (opzionale)
+            // Etichetta | url | LongDescription | icona css | icona svg | Sottomenu (opzionale) | item Class (opzionale)
 			new MenuItemGroup("Funzioni da analista", "#", "", "icon-nav icon-edit-3", "Assets/images/SidebarMenu/edit-3.svg",
 				[
 					new("Voce sottomenù", "/voce"),
