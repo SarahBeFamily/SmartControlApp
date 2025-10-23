@@ -1,8 +1,5 @@
 ﻿@page "/showcase"
 @rendermode InteractiveServer
-@using SmartControl.Components.Layout
-@using SmartControl.Components.Elements.Buttons
-@using SmartControl.Components.Elements.Tables
 
 <h1>Showcase</h1>
 
@@ -14,7 +11,7 @@
     <SCButton RenderStyle="Primary" Text="Popup big" OnClick="OpenPopupBig" />
 </div>
 
-<SCLayoutColumns Subtitle="Layout con Card (colonne 1+4)">
+@* <SCLayoutColumns Subtitle="Layout con Card (colonne 1+4)">
     <SCInnerColumn ColumnWidth1>
         <SCCard Classes="card-col" Title="Titolo Card" Text="Testo" FullHeight="false"></SCCard>
         <SCCard Classes="card-col" Title="Titolo Card" Text="Testo" FullHeight="false"></SCCard>
@@ -31,7 +28,7 @@
             </DxChart>
         </SCCard>
     </SCInnerColumn>
-</SCLayoutColumns>
+</SCLayoutColumns> *@
 
 <SCLayoutColumns Subtitle="Layout con Card (colonne 2+1+1+1)">
     <SCInnerColumn ColumnWidth2>
@@ -59,7 +56,7 @@
 
 <h1>Tabella e Filtri</h1>
 
-@* <SCHeaderNavigator @bind-SearchText="@SearchText" @bind-ShowFilterRow="@ShowFilterRow">
+<SCHeaderNavigator @bind-SearchText="@SearchText" @bind-ShowFilterRow="@ShowFilterRow">
     <Tabs>
         <SCHeaderNavigatorTab Text="Ricambio" FlyOutText="@FlyoutText"></SCHeaderNavigatorTab>
     </Tabs>
@@ -95,7 +92,7 @@
             </SCComboBoxLabel>
         </DxFormLayout>
     </Content>
-</SCHeaderNavigator> *@
+</SCHeaderNavigator>
 
 <DxGrid Data="@FIRs"
         @ref="GridFir"
@@ -112,7 +109,7 @@
         <DxGridCommandColumn Caption="Action" Width="30px" ClearFilterButtonVisible="false">
             <HeaderTemplate>Azione</HeaderTemplate>
             <CellDisplayTemplate>
-                <div><i class="oi oi-pencil" style="color:blue;" @onclick="@(() => GridFir.StartEditDataItemAsync(context.DataItem))"></i></div>
+                <div><i class="oi oi-pencil" style="color:blue;"></i></div>
             </CellDisplayTemplate>
         </DxGridCommandColumn>
         <DxGridDataColumn FieldName="Ticket" />
@@ -160,8 +157,7 @@
              imperdiet mauris. Fusce id purus magna."
          ShowFooter="true">
     <FooterContentTemplate>
-        <DxButton RenderStyle="ButtonRenderStyle.Primary" Text="OK"
-                  Click="@context.CloseCallback" />
+        <DxButton RenderStyle="ButtonRenderStyle.Primary" Text="OK" />
     </FooterContentTemplate>
 </DxPopup>
 
@@ -268,42 +264,4 @@
         </div>
         </DxFormLayoutItem>
     
-</DxFormLayout>
-
-<h1>Form con badge AI</h1>
-
-<DxFormLayout>
-    
-	    <DxFormLayoutItem ColSpanMd="4" CssClass="flex-column">
-            <CaptionTemplate>
-                <SCAiContent Label="DxTextBox" AiText="accuratezza 98%" Result="High"></SCAiContent>
-            </CaptionTemplate>
-            <Template>
-		        <DxTextBox @bind-Text="@Model.TestoObbligatorio" NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
-            </Template>
-	    </DxFormLayoutItem>
-    
-        <DxFormLayoutItem ColSpanMd="4" CssClass="flex-column">
-            <CaptionTemplate>
-                <SCAiContent Label="DxTextBox" AiText="accuratezza 88%" Result="Medium"></SCAiContent>
-            </CaptionTemplate>
-            <Template>
-                <DxTextBox NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
-            </Template>
-        </DxFormLayoutItem>
-
-    <DxFormLayoutItem ColSpanMd="4" CssClass="flex-column">
-        <CaptionTemplate>
-            @* <SCAiContent Label="DxTextBox" AiText="accuratezza 38%" Result="Low"></SCAiContent> *@
-        </CaptionTemplate>
-        <Template>
-            <DxTextBox NullText="Obbligatorio" ShowValidationIcon="true"></DxTextBox>
-        </Template>
-    </DxFormLayoutItem>
-
-    @* <SCAiContent AiText="accuratezza 88%" Result="Medium" ColSpanMd="4">
-        <DxFormLayoutItem Caption="DxTextBox" ColSpanMd="4">
-            <DxTextBox></DxTextBox>
-        </DxFormLayoutItem>
-    </SCAiContent> *@
 </DxFormLayout>

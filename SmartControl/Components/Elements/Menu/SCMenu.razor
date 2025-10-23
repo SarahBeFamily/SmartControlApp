@@ -19,18 +19,28 @@
 			var show = activeSub == "active" ? "show" : "";
 
 			<li id="@liId" class="@active @activeSub @item.ItemClass">
-				<div class="li-wrap @show" onclick="document.querySelector('#sub-@liId').classList.toggle('show');
-													document.querySelector('#@liId').classList.toggle('open');
-													document.getElementById('sidebar').classList.remove('collapsed');">
-					<i class="@item.IconCssClass"></i>
-					<a href="@item.NavigateUrl" class="@(item.Groups != null && item.Groups.Count > 0 ? "" : "no-group")">
-						<span>@item.Name</span>
-					</a>
-					<span class="action-submenu icon-chevron-right @(item.Groups != null && item.Groups.Count > 0 ? "" : "disabled")" 
-							aria-hidden="true"
-							onclick="document.querySelector('#sub-@liId').classList.toggle('show')">
-					</span>
-				</div>
+
+				@if (item.Groups != null && item.Groups.Count > 0)
+				{
+					<div class="li-wrap @show" onclick="document.querySelector('#sub-@liId').classList.toggle('show');document.querySelector('#@liId').classList.toggle('open');document.querySelector('#sidebar').classList.remove('collapsed')">
+						<i class="@item.IconCssClass"></i>
+						<a href="@item.NavigateUrl" class="@(item.Groups != null && item.Groups.Count > 0 ? "" : "no-group")">
+							<span>@item.Name</span>
+						</a>
+						<span class="action-submenu icon-chevron-right @(item.Groups != null && item.Groups.Count > 0 ? "" : "disabled")"
+							  aria-hidden="true"
+							  onclick="document.querySelector('#sub-@liId').classList.toggle('show')">
+						</span>
+					</div>
+				
+				} else {
+					<div class="li-wrap @show">
+						<i class="@item.IconCssClass"></i>
+						<a href="@item.NavigateUrl" class="no-group">
+							<span>@item.Name</span>
+						</a>
+					</div>
+				}
 
 				@if (item.Groups != null && item.Groups.Count > 0)
 				{

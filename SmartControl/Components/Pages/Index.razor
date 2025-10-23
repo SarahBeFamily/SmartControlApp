@@ -2,36 +2,25 @@
 <PageTitle>Welcome</PageTitle>
 
 <div class="main-content">
-    <DxGridLayout CssClass="welcome-gridlayout" RowSpacing="3rem">
-        <Rows>
-            <DxGridLayoutRow Height="auto" Areas="header"></DxGridLayoutRow>
-            <DxGridLayoutRow Height="auto" Areas="cards"></DxGridLayoutRow>
-        </Rows>
-        <Items>
-            <DxGridLayoutItem Area="header" CssClass="title">
-                <Template>
-                    <div class="title-header-text">Hello World!</div>
-                    <div class="title-content-text">Welcome to your new DevExpress Blazor Application</div>
-                </Template>
-            </DxGridLayoutItem>
-            <DxGridLayoutItem Area="cards" CssClass="welcome-cards">
-                <Template>
-                    <NavLink class="welcome-card" href="/counter">
-                        <svg class="welcome-card-img" alt="counter card">
-                            <use href="images/cards.svg#counter"></use>
-                        </svg>
-                        <div class="welcome-card-text">Counter</div>
-                        <div class="welcome-card-back"></div>
-                    </NavLink>
-                    <NavLink class="welcome-card" href="/weather">
-                        <svg class="welcome-card-img" alt="weather card">
-                            <use href="images/cards.svg#weather"></use>
-                        </svg>
-                        <div class="welcome-card-text">Weather</div>
-                        <div class="welcome-card-back"></div>
-                    </NavLink>
-                </Template>
-            </DxGridLayoutItem>
-        </Items>
-    </DxGridLayout>
+    <SCLayoutColumns Subtitle="Layout con Card (colonne 2+1+1+1)">
+        <SCInnerColumn ColumnWidth2>
+            <SCCard Classes="card-alt"
+                    Category="Documenti"
+                    Title="Archivio Fir"
+                    Text=">Hai bisogno di visionare rapidamente i tuoi documenti?"
+                    Link="#"
+                    LinkText="Visualizzali tutti"
+                    Icon="bi bi-airplane-fill">
+            </SCCard>
+        </SCInnerColumn>
+        <SCInnerColumn ColumnWidth1>
+            <SCCard Title="Titolo Card" Text="Con icona" Icon="icon-weight" />
+        </SCInnerColumn>
+        <SCInnerColumn ColumnWidth1>
+            <SCCard Title="Titolo Card" Text="Con icona" Icon="bi-alarm"></SCCard>
+        </SCInnerColumn>
+        <SCInnerColumn ColumnWidth1>
+            <SCCard Title="Titolo Card" Text="Testo full h"></SCCard>
+        </SCInnerColumn>
+    </SCLayoutColumns>
 </div>

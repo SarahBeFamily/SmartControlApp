@@ -1,0 +1,13 @@
+﻿@{
+	var iconClass = Icon == null ? "bi bi-layers-fill" : Icon;
+}
+
+<div class="isys-comboboxlabel @CssClass d-flex">
+	<div class="label-filter">
+		<i class="@iconClass"></i>
+		<span>@Label</span>
+	</div>
+
+	@ChildContent
+
+</div>

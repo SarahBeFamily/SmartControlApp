@@ -9,7 +9,7 @@
     <base href="/" />
     <link href=@AppendVersion("css/bootstrap/bootstrap.min.css") rel="stylesheet" />
     <link href=@AppendVersion("_content/DevExpress.Blazor.Themes/bootstrap-external.bs5.min.css") rel="stylesheet" />
-    @* <link href=@AppendVersion("css/open-iconic/font/css/open-iconic-bootstrap.min.css") rel="stylesheet" /> *@
+    <link href=@AppendVersion("css/open-iconic/font/css/open-iconic-bootstrap.min.css") rel="stylesheet" />
     @* <link href=@AppendVersion("_content/DevExpress.Blazor.Themes/blazing-berry.bs5.min.css") rel="stylesheet" /> *@
     @DxResourceManager.RegisterScripts()
     <link href=@AppendVersion("css/site.css") rel="stylesheet" />
@@ -20,6 +20,7 @@
 <body>
     <Routes></Routes>
     <script src="_framework/blazor.web.js"></script>
+    <script src=@AppendVersion("js/login-slider.js")></script>
 </body>
 
 </html>

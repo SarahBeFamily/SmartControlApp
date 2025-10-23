@@ -1,0 +1,124 @@
+﻿@page "/Account/login"
+@layout LoginLayout
+@inject NavigationManager NavManager
+@rendermode InteractiveServer
+
+<div id="loginPage">
+
+    <div id="logo">
+        <img src="Assets/images/Loghi/Logo_SmartControl.svg" alt="Smart Control" class="brand-image" width="387" height="50" />
+    </div>
+
+    <div class="container-fluid flex flex-between">
+
+        <div class="login-box blur-box">
+            <h1>
+                Accedi a<br>
+                SC Platform
+            </h1>
+
+            <p>Piattaforma per il controllo di gestione.</p>
+
+            <DxFormLayout CaptionPosition="CaptionPosition.Vertical" CssClass="w-100">
+                <DxFormLayoutItem Caption="Email" ColSpanMd="12" CssClass="mt-3 mb-2">
+                    <DxTextBox @bind-Text="email" NullText="Inserisci la tua mail" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem Caption="Password" ColSpanMd="12" CssClass="mb-3">
+                    <DxTextBox @bind-Text="password" NullText="Inserisci la tua password" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12" CssClass="mb-2">
+                    <DxButton RenderStyle="ButtonRenderStyle.Primary" Text="Accedi" Click="Accedi" CssClass="w-100" />
+                </DxFormLayoutItem>
+                <DxFormLayoutItem ColSpanMd="12">
+                    <DxButton RenderStyle="ButtonRenderStyle.Link" Text="Hai dimenticato la password?" CssClass="w-100 --primary" />
+                </DxFormLayoutItem>
+            </DxFormLayout>
+        </div>
+
+ 
+        <div id="slider" class="blur-box">
+            <h2>Resta sempre aggiornato sulle novità dal mondo SmartControl.</h2>
+            <p>Informazioni e best practice sul controllo di gestione, eventi e curiosità.</p>
+
+            <div id="news-slider">
+                <div>
+                    <span class="date">12.07.2025 - NEWS</span>
+					<h3>Unisciti alla nostra community.</h3>
+					<p>Scopri le ultime funzionalità introdotte nella nostra piattaforma.</p>
+                    <SCButton CssClass="link-arrow" Text="Leggi Articolo" RenderStyle="link"></SCButton>
+                </div>
+                <div>
+					<span class="date">12.07.2025 - NEWS</span>
+                    <h3>Novità 2</h3>
+                    <p>Partecipa al nostro prossimo webinar per approfondire le nuove funzionalità.</p>
+                </div>
+                <div>
+                    <span class="date">12.07.2025 - NEWS</span>
+					<h3>Novità 3</h3>
+					<p>Leggi il nostro ultimo articolo sul blog per scoprire come sfruttare al meglio la piattaforma.</p>
+                </div>
+                <div>
+                    <span class="date">12.07.2025 - NEWS</span>
+                    <h3>Novità 4</h3>
+                    <p>Unisciti alla nostra community per condividere esperienze e suggerimenti con altri utenti.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // var bgphoto = document.querySelector(".bg-photo");
+        // var slider = document.querySelector("#img_slider");
+        // var img_in_slider = slider.querySelectorAll("img");
+        // var n_img = img_in_slider.length;
+        // var corrente = 0;
+
+        // function play() {
+        //     bgphoto.classList.add("fade");
+        //     corrente++;
+        //     if (corrente > n_img)  corrente = 1;
+
+        //     for (var i = n_img; i > 0; i--) {
+        //         slider.querySelector("img:nth-child(" + i + ")").classList.remove("fade");
+        //     }
+        //     slider.querySelector("img:nth-child(" + corrente + ")").classList.add("fade");
+        // }
+
+        // setInterval(play, 8000);
+    </script>
+
+</div>
+
+<DxPopup @bind-Visible="@PopupVisible"
+         HeaderText="Errore"
+         BodyText="Username o password errati, riprova."
+         ShowFooter="true">
+    <FooterContentTemplate>
+        <DxButton RenderStyle="ButtonRenderStyle.Primary" Text="OK"
+                  Click="@context.CloseCallback" />
+    </FooterContentTemplate>
+</DxPopup>
+
+@code
+{
+    private string email;
+    private string password;
+    bool PopupVisible { get; set; } = false;
+
+    private void OpenPopoup()
+    {
+        PopupVisible = true;
+    }
+
+    private void Accedi()
+    {
+        if (email == "admin" && password == "admin")
+        {
+            NavManager.NavigateTo("/");
+        }
+        else
+        {
+            OpenPopoup();
+        }
+    }
+}

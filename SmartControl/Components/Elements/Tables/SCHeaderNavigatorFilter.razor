@@ -1,0 +1,30 @@
+﻿<li>
+    @if (ChildContent is null)
+    {
+        <button class="isys-button @(Active ? "active":"")" render-style="Secondary" @onclick="OnClick">
+            @if (Text != null)
+            {
+                <span>@Text</span>
+            }
+
+            @if (BadgeNumber != null)
+            {
+                <span>&nbsp;</span>
+                <span class="badge-number">@BadgeNumber</span>
+			}
+        </button>
+    }
+    else
+    {
+        @ChildContent
+    }
+</li>
+
+@code
+{
+    [Parameter] public string? Text { get; set; }
+    [Parameter] public bool Active { get; set; }
+    [Parameter] public string? BadgeNumber { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}

@@ -1,0 +1,5 @@
+﻿@{
+	var CustomColor = Color != null ? "background-color:" + Color + ";" : "";
+	var ColorClass = ColorGray ? "gray" : ColorGreen ? "green" : ColorRed ? "red" : ColorYellow ? "yellow" : ColorOrange ? "orange" : ColorBlack ? "black" : "gray";
+}
+<span class="badge @ColorClass" style="@CustomColor">@Label</span>

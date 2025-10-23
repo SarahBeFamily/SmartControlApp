@@ -4,7 +4,7 @@
 /// Layout a Colonne (max 5 colonne)
 /// </summary>
 
-namespace SmartControl.Components.Elements
+namespace SmartControl.Components.Layout.Columns
 {
     public partial class SCLayoutColumns
     {
