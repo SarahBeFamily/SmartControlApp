@@ -1,0 +1,24 @@
+﻿<div id="@filterID" class="sc-filter-header @CssClasses">
+	<div class="filter-header-content flex align-center justify-content-between">
+		<div class="inner-content flex align-center gap-3">
+			@if (ChildContent != null)
+			{
+				@ChildContent
+			}
+		</div>
+		<div class="settings flex align-center">
+			<i class="icon-menu-kebab"></i>
+		</div>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public string filterID { get; set; }
+
+	[Parameter]
+	public string CssClasses { get; set; }
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+}

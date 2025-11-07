@@ -5,7 +5,7 @@
 /// Scegliere la larghezza della colonna da 1 a 5
 /// </summary>
 
-namespace SmartControl.Components.Layout.Columns
+namespace SmartControl.Components.Elements.Layout.Columns
 {
     public partial class SCInnerColumn
     {

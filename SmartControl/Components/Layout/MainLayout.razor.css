@@ -22,16 +22,6 @@
         display: none;
     }
 
-::deep .icon-back {
-    -webkit-mask-image: url("images/back.svg");
-    mask-image: url("images/back.svg");
-}
-
-::deep .icon-menu {
-    -webkit-mask-image: url("images/menu.svg");
-    mask-image: url("images/menu.svg");
-}
-
 ::deep .content {
     overflow: auto;
     display: flex;
@@ -45,7 +35,7 @@
 .nav-buttons-container {
     display: flex;
     gap: 10px;
-    padding: 22px 0;
+    padding: 12px 0;
 }
 
     .nav-buttons-container ::deep .menubutton-float-end {

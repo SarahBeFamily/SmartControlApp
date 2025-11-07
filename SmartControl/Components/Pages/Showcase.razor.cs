@@ -23,11 +23,12 @@ namespace SmartControl.Components.Pages
             nisi blandit tincidunt vel efficitur purus. Nunc nec turpis tempus, accumsan orci auctor,
             imperdiet mauris. Fusce id purus magna.";
 
-        private List<FIR> FIRs { get; set; } = new(); // Inizializzato a una nuova lista
-        IEnumerable<Location> Locations { get; set; } = new List<Location>(); // Inizializzato a una nuova lista
+        private List<FIR> FIRs { get; set; } = []; // Inizializzato a una nuova lista
+        IEnumerable<Location> Locations { get; set; } = []; // Inizializzato a una nuova lista
         Location Trasportatore { get; set; } = new(); // Inizializzato a un nuovo oggetto
-        IGrid GridFir;
-        IEnumerable<SaleInfo> dataSource = new List<SaleInfo>(); // Inizializzato a una nuova lista
+
+        private IGrid? GridFir;
+        IEnumerable<SaleInfo> dataSource = []; // Inizializzato a una nuova lista
 
         protected ViewModel Model { get; set; } = new();
 
@@ -105,12 +106,12 @@ namespace SmartControl.Components.Pages
 
         private void BuildLocation()
         {
-            Locations = new List<Location>()
-                {
+            Locations =
+                [
                     new() { RagioneSociale = "Bartolini", Citta = "Bergamo", Indirizzo = "Via Ugo Foscolo 4" },
                     new() { RagioneSociale = "SDA", Citta = "Padova", Indirizzo = "Via Aprilia 4" },
                     new() { RagioneSociale = "DHL", Citta = "Torino", Indirizzo = "Via Galvani 456" }
-                };
+                ];
         }
 
         public class FIR
@@ -131,8 +132,8 @@ namespace SmartControl.Components.Pages
             public string Citta { get; set; } = string.Empty; // Inizializzato a stringa vuota
         }
 
-        public string[] Anni = new string[] { "2021", "2020", "2019", "2018", "2017" };
-        public string[] Sedi = new string[] { "Sede 1", "Sede 2", "Sede 3", "Sede 4", "Sede 5" };
+        public string[] Anni = ["2021", "2020", "2019", "2018", "2017"];
+        public string[] Sedi = ["Sede 1", "Sede 2", "Sede 3", "Sede 4", "Sede 5"];
 
         protected class ViewModel
         {

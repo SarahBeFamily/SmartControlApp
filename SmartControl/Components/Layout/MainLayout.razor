@@ -18,7 +18,7 @@
         } else
 		{
             <div id="brand-image">
-                <div class="menu-button" onclick="(document.getElementById('sidebar').classList.toggle('collapsed'));(document.getElementById('brand-image').classList.toggle('collapsed'))">
+                <div class="menu-button flex" onclick="(document.getElementById('sidebar').classList.toggle('collapsed'));(document.getElementById('brand-image').classList.toggle('collapsed'))">
                     <img src="Assets/images/Loghi/Logo_SmartControl.svg" alt="SmartControl" class="brand-image" width="220" height="29" />
                     <img src="Assets/images/Loghi/Logotipo_SmartControl.svg" alt="SmartControl" class="brand-image collapsed" width="49" height="30" />
                 </div>
@@ -65,7 +65,7 @@
 
             @* To Do: creare componente per questo blocco *@
             <div class="company flex">
-                <img src="Assets/images/Loghi/company-sidebar.png" alt="" />
+                <img src="Assets/images/Loghi/company-sidebar.png" alt="" width="50px" height="auto" />
                 <div class="info flex flex-column">
                     <span class="name">Credipass srl</span>
 					<span class="role">Hgroup</span>
@@ -85,8 +85,10 @@
             </button>
         </div>
 
-        <div class="main-content">
-            @Body
+        <div id="main-content-wrapper">
+            <div id="sc-main-container">
+                @Body
+            </div>
         </div>
     </div>
 
@@ -115,6 +117,11 @@
     public void Dispose()
     {
         NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+
+    public void collapseSidebar()
+    {
+       
     }
 
 }

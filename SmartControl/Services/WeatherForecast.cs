@@ -1,13 +1,14 @@
-namespace SmartControl.Services
+using System;
+
+namespace SmartControl.Data
 {
     public class WeatherForecast
     {
-        public DateOnly Date { get; set; }
-
+        public DateTime Date { get; set; }
         public int TemperatureC { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-
-        public string? Summary { get; set; }
+        public bool Precipitation { get; set; }
+        public string Forecast { get; set; }
+        public double TemperatureF => Math.Round((TemperatureC * 1.8 + 32), 2);
+        public string CloudCover { get; set; }
     }
 }

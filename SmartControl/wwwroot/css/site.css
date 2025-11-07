@@ -3,7 +3,10 @@
 
 :root {
     --primary-color: #0B2572;
+    --dark-blue: #0c2673;
+    --light-blue: #e9eef9;
     --primary-color-light: #1445d6;
+    --blue-gray: #54669C;
     --rgb-primary-color: 255, 90, 30;
     --light-gray: #F4F8FF;
     --rgb-light-gray: 245, 245, 240;
@@ -17,6 +20,7 @@
     --font-text: 'DM Sans', sans-serif;
     --font-titles: 'Archivo', sans-serif;
     --Neutral-Input-Text: #CED4FF;
+    --Neutral-Light-Text: #6F787C;
     --text-light: #CED4FF;
     --icon-color: #CED4FF;
     --Blue-hover: #0D47A1;
@@ -147,6 +151,7 @@ html, body {
 .flex-row { flex-direction: row;}
 .flex-center { justify-content: center; align-items: center;}
 .items-center { align-items: center; }
+.flex.align-center { align-items: center; }
 .flex-between { justify-content: space-between;}
 .align-start { align-items: flex-start;}
 .mb-30 { margin-bottom: 30px;}

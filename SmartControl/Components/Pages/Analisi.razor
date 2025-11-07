@@ -1,0 +1,36 @@
+﻿@page "/analisi"
+@inject WeatherForecastService ForecastService
+
+<PageTitle>Welcome</PageTitle>
+
+
+<SCBreadcrumb>
+	<SCBreadcrumbItem Text="SC Platform" Url="/" />
+	<SCBreadcrumbItem Text="Analisi Budget Diretto" Active="true" />
+</SCBreadcrumb>
+
+<SCFilterHeader filterID="analisi-header">
+	<SCButton Icon="icon-filter" Text="Filtri" CssClass="filter-button" RenderStyle="Primary"></SCButton>
+	<SCButton Icon="icon-filter" Text="Preferenze Utente" RenderStyle="Primary"></SCButton>
+</SCFilterHeader>
+
+<SCContainer HasFilterHeader="true">
+    <DxGrid Data="@Data" PageSize="15"
+            ColumnResizeMode="GridColumnResizeMode.NextColumn" TextWrapEnabled="false">
+        <Columns>
+            <DxGridDataColumn FieldName="Date" DisplayFormat="D" MinWidth="100" SortIndex="0" SortOrder="GridColumnSortOrder.Ascending" />
+            <DxGridDataColumn FieldName="Forecast" Width="15%" SortIndex="0" SortOrder="GridColumnSortOrder.Ascending" />
+            <DxGridDataColumn FieldName="CloudCover" Width="15%" SortIndex="0" SortOrder="GridColumnSortOrder.Ascending" />
+            <DxGridDataColumn FieldName="TemperatureC" Caption="@("Temp. (\x2103)")" Width="10%" SortIndex="0" SortOrder="GridColumnSortOrder.Ascending" />
+            <DxGridDataColumn FieldName="TemperatureF" Caption="@("Temp. (\x2109)")" Width="10%" SortIndex="0" SortOrder="GridColumnSortOrder.Ascending" />
+        </Columns>
+    </DxGrid>
+</SCContainer>
+
+@code {
+    object Data { get; set; }
+    protected override void OnInitialized()
+    {
+        Data = ForecastService.GetForecast().ToList();
+    }
+}

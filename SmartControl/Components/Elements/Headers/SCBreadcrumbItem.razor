@@ -1,0 +1,23 @@
+@{
+	var Class = Active ? "breadcrumb-item active" : "breadcrumb-item";
+	var AriaCurrent = Active ? " aria-current=\"page\"" : string.Empty;
+}
+
+<li class="@Class" @AriaCurrent >
+	@if (Url != null) {
+		<a href="@Url">@Text</a>
+	} else {
+		<span>@Text</span>
+	}
+</li>
+
+@code {
+	[Parameter]
+	public string Text { get; set; } = string.Empty;
+
+	[Parameter]
+	public string? Url { get; set; }
+
+	[Parameter]
+	public bool Active { get; set; } = false;
+}

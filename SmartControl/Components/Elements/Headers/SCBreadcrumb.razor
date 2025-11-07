@@ -1,0 +1,12 @@
+<div class="sc-breadcrumb @CssClasses">
+    <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb">
+            @ChildContent
+        </ol>
+    </nav>
+</div>
+
+@code {
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public string CssClasses { get; set; }
+}
